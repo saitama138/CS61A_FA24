@@ -1,6 +1,5 @@
 from operator import add, sub
 
-
 def a_plus_abs_b(a, b):
     """Return a+abs(b), but without calling abs.
 
@@ -18,7 +17,6 @@ def a_plus_abs_b(a, b):
     else:
         f = add
     return f(a, b)
-
 
 def a_plus_abs_b_syntax_check():
     """Check that you didn't change the return statement of a_plus_abs_b.
@@ -44,8 +42,8 @@ def two_of_three(i, j, k):
     >>> two_of_three(5, 5, 5)
     50
     """
-    return min(i * i + j * j, j * j + k * k, i * i + k * k)
-
+    #cach toi uu hon : return min(i * i + j * j, j * j + k * k, i * i + k * k)
+    return min(max(i, j), max(j, k)) * min(max(i, j), max(j, k)) + min(i, j, k) * min(i, j, k)
 
 def two_of_three_syntax_check():
     """Check that your two_of_three code consists of nothing but a return statement.
@@ -69,11 +67,23 @@ def largest_factor(n):
     1
     """
     "*** YOUR CODE HERE ***"
-    i = n - 1
-    while n > 0 :
+    """
+    cach toi uu hon :
+    factor = n - 1
+    while factor > 0 :
+        if n % factor == 0 :
+            return factor
+        factor = factor - 1
+    """
+    i = 1
+    factor_largest = 0
+    while i < n :
         if n % i == 0 :
-            return i
-        i-= 1
+            factor_largest = i
+            i = i + 1
+        else :
+            i = i + 1
+    return factor_largest
 
 def hailstone(n):
     """Print the hailstone sequence starting at n and return its
@@ -95,14 +105,34 @@ def hailstone(n):
     1
     """
     "*** YOUR CODE HERE ***"
-    i = 1
-    while n != 1 :
+    """
+        cach toi uu hon :
+        counter = 1
+        while n != 1 :
+            print(n)
+            if n % 2 == 0 :
+                n = n // 2
+            else :
+                n = n * 3 + 1
+            counter = counter + 1
         print(n)
-        if n % 2 == 0 :
-            n//= 2
-            i+= 1
-        else :
-            n = n * 3 + 1
-            i+= 1
-    print(n)
-    return i
+        return counter
+    """
+    counter = 1
+    if n == 1 :
+        print(1)
+        return counter
+    else :
+        print(n)
+        while n != 1 :
+            if n % 2 == 0 :
+                n = n // 2
+                print(n)
+                counter = counter + 1
+            else :
+                n = (n * 3) + 1
+                print(n)
+                counter = counter + 1
+    return counter
+
+
